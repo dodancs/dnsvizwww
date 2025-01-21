@@ -25,7 +25,7 @@ By default the `docker-compose.yml` is set to build the image locally:
       context: .
 ```
 
-But, if you want to use a pre-made image, I have them published here on Github in the [packages section](https://github.com/users/dodancs/packages?repo_name=dnsvizwww), so you may use:
+But, if you want to use a pre-made image, I have them published here on Github in the [packages section](https://github.com/dodancs/dnsvizwww/pkgs/container/dnsvizwww), so you may use:
 
 ```yaml
   dnsviz:
@@ -35,7 +35,9 @@ But, if you want to use a pre-made image, I have them published here on Github i
     #  context: .
 ```
 
-After modifying the docker-compose.yml file, just bring the containers up, or pull the images before hand:
+It is better to put your local changes into `docker-compose.override.yml` as that won't interfere with this repository, see https://github.com/dodancs/dnsvizwww?tab=readme-ov-file#changes-to-docker-compose-yml.
+
+After modifying the `docker-compose.yml` file, just bring the containers up, or pull the images before hand:
 
 ```bash
 $ docker-compose pull
@@ -45,6 +47,8 @@ $ docker-compose up -d
 ## Configuration
 
 The main configuration file is `dnsvizwww/settings.py`, and it is ready to be deployed as is, because anything that would be user-configurable is exposed as an environment variable that you can set in deployment.
+
+### Setting up environment variables
 
 Copy the `env.example` file to `.env` and check it out:
 
@@ -69,7 +73,7 @@ DEBUG=true
 TZ=Americas/Detroit
 ```
 
-By default, the container uses PostgreSQL as its backend for data, so the docker-compose.yml also reflects this. You only need to change the `POSTGRES_PASSWORD` value to be extra safe.
+By default, the container uses PostgreSQL as its backend for data, so the `docker-compose.yml` also reflects this. You only need to change the `POSTGRES_PASSWORD` value to be extra safe.
 
 Other than that, be sure to change the `SECRET_KEY` value to something strong, for example you can use the output of openssl like so:
 
@@ -95,6 +99,8 @@ Also as you prefer, you may change the timezone:
 ```ini
 TZ=Americas/Detroit
 ```
+
+### Changes to `docker-compose.yml`
 
 By default the database container stores its files to `./data`, but you may change it and use volumes. To do this, do not edit the `docker-compose.yml` file directly, but rather create an override file:
 
