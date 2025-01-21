@@ -36,7 +36,6 @@ import dns.edns, dns.message, dns.name, dns.rdataclass, dns.rdatatype
 from django import forms
 from django.conf import settings
 from django.core.mail import EmailMessage
-from django.utils.timezone import utc
 
 from dnsviz.analysis.online import ANALYSIS_TYPE_AUTHORITATIVE, ANALYSIS_TYPE_RECURSIVE
 import dnsviz.format as fmt
@@ -352,7 +351,7 @@ def domain_date_search_form(name):
 
         def clean_date(self):
             dt = datetime.datetime(self.cleaned_data['date'].year, self.cleaned_data['date'].month, self.cleaned_data['date'].day, \
-                    23, 59, 59, 999999, tzinfo=utc)
+                    23, 59, 59, 999999, tzinfo=datetime.timezone.utc)
             self.name_obj = OfflineDomainNameAnalysis.objects.latest(name, dt)
             if self.name_obj is None:
                 del self.name_obj
