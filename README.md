@@ -35,7 +35,7 @@ But, if you want to use a pre-made image, I have them published here on Github i
     #  context: .
 ```
 
-It is better to put your local changes into `docker-compose.override.yml` as that won't interfere with this repository, see https://github.com/dodancs/dnsvizwww?tab=readme-ov-file#changes-to-docker-compose-yml.
+It is better to put your local changes into `docker-compose.override.yml` as that won't interfere with this repository, see [Changes to docker-compose.yml](https://github.com/dodancs/dnsvizwww?tab=readme-ov-file#changes-to-docker-composeyml).
 
 After modifying the `docker-compose.yml` file, just bring the containers up, or pull the images before hand:
 
