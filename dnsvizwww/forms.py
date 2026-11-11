@@ -115,6 +115,8 @@ class DNSSECOptionsForm(forms.Form):
             help_text='Ignore warnings and errors related to RFC 8624, which designates some DNSSEC algorithms prohibited (MUST NOT) or not recommended.')
     ignore_rfc9276 = forms.BooleanField(label='Ignore RFC 9276:', initial=False, required=False, widget=forms.CheckboxInput(attrs={'class': 'no-border'}),
             help_text='Ignore warnings and errors related to RFC 9276, which limits the NSEC3 iterations count and NSEC3 salt length to 0.')
+    trust_cds = forms.BooleanField(label='Trust CDS/CDNSKEY:', initial=False, required=False, widget=forms.CheckboxInput(attrs={'class': 'no-border'}),
+            help_text='Trust all CDNSKEY and CDS records, even if they are not signed with a key that is represented in both the DNSKEY and DS RRsets.')
     multi_signer = forms.BooleanField(label='Multi-signer:', initial=False, required=False, widget=forms.CheckboxInput(attrs={'class': 'no-border'}),
             help_text='Don\'t issue errors for missing KSKs with DS RRs (e.g., for multi-signer setups)')
     ta = LenientMultipleChoiceField(label='Trust anchors:', choices=ANCHOR_CHOICES, initial=['.'], required=False, widget=forms.CheckboxSelectMultiple(attrs={'class': 'no-border'}),
