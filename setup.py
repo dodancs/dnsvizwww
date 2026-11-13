@@ -16,7 +16,7 @@ else:
     from setuptools.command.build_py import build_py
 
 setup(name='dnsvizwww',
-        version='0.2.0pre',
+        version='0.2.2',
         author='Casey Deccio',
         author_email='casey@deccio.net',
         url='https://github.com/dnsviz/dnsvizwww/',
@@ -37,7 +37,7 @@ setup(name='dnsvizwww',
                 ('share/dnsvizwww/templates', glob.glob(os.path.join('dnsvizwww', 'templates', '*.html'))),
         ],
         requires=[
-                'dnsviz (==0.2.0)',
+                'dnsviz (==0.2.2)',
                 'django (==1.7.0)',
         ],
 )

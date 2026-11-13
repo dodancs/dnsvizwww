@@ -1,5 +1,4 @@
-# python version higher than 3.11 does not have distutils
-FROM python:3.11-alpine
+FROM python:3.15-alpine
 
 RUN apk add \
     graphviz \
@@ -24,13 +23,14 @@ RUN apk add --virtual builddeps \
     swig \
     py3-distutils-extra \
     \
-    && pip3 install --break-system-packages \
-    gunicorn==23.0.0 \
-    pygraphviz==1.14 \
+    && LDFLAGS="-L/usr/lib/graphviz -Wl,-rpath,/usr/lib/graphviz" \
+    pip3 install --break-system-packages \
+    gunicorn \
+    pygraphviz \
     cryptography \
-    dnspython==2.2.1 \
-    django==5.1.5 \
-    dnsviz==0.11.0 \
+    dnspython \
+    django \
+    dnsviz \
     psycopg2 \
     \
     && apk del builddeps
