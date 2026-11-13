@@ -1,15 +1,16 @@
 FROM python:3.15-alpine
 
-RUN apk add \
+RUN apk add --no-cache \
     graphviz \
     ttf-liberation \
     bind \
     bind-tools \
     postgresql-libs \
     libpq \
-    tzdata
+    tzdata \
+    && rm -rf /var/cache /root/.cache
 
-RUN apk add --virtual builddeps \
+RUN apk add --no-cache --virtual builddeps \
     gcc \
     g++ \
     musl-dev \
@@ -24,7 +25,7 @@ RUN apk add --virtual builddeps \
     py3-distutils-extra \
     \
     && LDFLAGS="-L/usr/lib/graphviz -Wl,-rpath,/usr/lib/graphviz" \
-    pip3 install --break-system-packages \
+    pip3 install --break-system-packages --no-cache \
     gunicorn \
     pygraphviz \
     cryptography \
@@ -33,7 +34,8 @@ RUN apk add --virtual builddeps \
     dnsviz \
     psycopg2 \
     \
-    && apk del builddeps
+    && apk del builddeps \
+    && rm -rf /var/cache /root/.cache
 
 COPY LICENSE /app/
 COPY README.md /app/
